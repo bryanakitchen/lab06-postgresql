@@ -14,8 +14,24 @@ describe('App routes for Friend model', () => {
     return pool.end();
   });
 
-  it('Use POST route to add new Friend', () => {
+  it('Use POST route to add new Friend', async () => {
+    
+    const data = await request(app)
+      .post('/api/v1/friends')
+      .send({
+        name: 'Isaac',
+        age: 41,
+        isBestFriend: true,
+        hiddenTalent: 'being awesome'
+      });
 
+    expect(data.body).toEqual({
+      id: '1',
+      name: 'Isaac',
+      age: 41,
+      isBestFriend: true,
+      hiddenTalent: 'being awesome'
+    });
   });
     
 });
